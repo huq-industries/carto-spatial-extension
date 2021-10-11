@@ -2,18 +2,15 @@
 
 # Script to create a Spatial Extension package for BigQuery
 
-# * BQ_PROJECT
 # * BQ_BUCKET
 
-if [[ ! "$BQ_PROJECT" =~ ^(carto-os)$ ]]; then
-    echo "Invalid project $BQ_PROJECT"
-    exit 0
-fi
 
-PACKAGE_BUCKET="${BQ_BUCKET}bigquery/packages"
-PACKAGE_NAME="$BQ_PROJECT-spatial-extension-bigquery"
+PACKAGE_TAG="$(git log -1 --format=%cd --date=short).$(git rev-parse --short HEAD)"
+PACKAGE_NAME="carto-spatial-extension-bigquery"
 
-echo "Creating installation package $PACKAGE_BUCKET/$PACKAGE_NAME.zip"
+PACKAGE_BUCKET="${BQ_BUCKET}/${PACKAGE_NAME}/bigquery/packages"
+
+echo "Creating installation package $PACKAGE_BUCKET/$PACKAGE_NAME-$PACKAGE_TAG.zip"
 
 SCRIPT_DIR=$( dirname "$0" )
 
@@ -36,4 +33,4 @@ CWD=$(pwd)
 cd $DIST_DIR && zip -r $PACKAGE_NAME.zip * && cd $CWD
 
 # Upload the package to the bucket
-gsutil -h "Content-Type:application/zip" cp $DIST_DIR/$PACKAGE_NAME.zip $PACKAGE_BUCKET/
+gsutil -h "Content-Type:application/zip" cp $DIST_DIR/$PACKAGE_NAME-PACKAGE_TAG.zip $PACKAGE_BUCKET/
