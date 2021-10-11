@@ -2,10 +2,8 @@ name: CI
 
 on:
   push:
-    branches-ignore:
-      - master
-  pull_request_target:
-    types: [labeled]
+    branches:
+      - this-branch-should-not-exist
 
 env:
   NODE_VERSION: 14

@@ -1,10 +1,9 @@
 name: Staging
 
 on:
-  pull_request_review:
-    types: [submitted]
-  pull_request_target:
-    types: [labeled]
+  push:
+    branches:
+      - this-branch-should-not-exist
 
 jobs:
 

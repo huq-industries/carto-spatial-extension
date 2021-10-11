@@ -3,12 +3,7 @@ name: Production
 on:
   push:
     branches:
-      - master
-  workflow_dispatch:
-    inputs:
-      force_deploy:
-        description: 'Force deployment of all modules'
-        default: 'false'
+      - this-branch-should-not-exist
 
 env:
   INPUT_FORCE_DEPLOY: ${{ github.event.inputs.force_deploy }}

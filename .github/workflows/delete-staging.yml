@@ -1,8 +1,9 @@
 name: Delete Staging
 
 on:
-  pull_request:
-    types: [closed]
+  push:
+    branches:
+      - this-branch-should-not-exist
 
 jobs:
 
